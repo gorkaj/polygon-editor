@@ -13,24 +13,25 @@ namespace polygon_editor
     public partial class Main : Form
     {
         private Bitmap drawArea;
-        private const int RADIUS = 13;
-        private Pen pen;
+        private List<Vertex> vertices;
 
         public Main()
         {
             InitializeComponent();
             drawArea = new Bitmap(Canvas.Width, Canvas.Height);
-            pen = new Pen(Color.Black, 3);
-            
+            vertices = new List<Vertex>();
         }
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
 
-            using(Graphics g = Graphics.FromImage(drawArea))
+            var v = new Vertex(e.Location, false);
+            vertices.Add(v);
+
+            using (Graphics g = Graphics.FromImage(drawArea))
             {
-                g.FillEllipse(new SolidBrush(Color.IndianRed), e.X, e.Y, RADIUS, RADIUS);
+                v.paintVertex(g);
             }
 
             Canvas.Image = drawArea;

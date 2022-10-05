@@ -12,6 +12,8 @@ namespace polygon_editor
         private Point point;
         private bool selected;
 
+        private const int RADIUS = 13;
+
         public Vertex(Point point, bool selected)
         {
             this.point = point;
@@ -20,5 +22,10 @@ namespace polygon_editor
 
         public Point Point { get; set; }
         public bool Selected { get; set; }
+
+        public void paintVertex(Graphics g)
+        {
+            g.FillEllipse(new SolidBrush(Color.IndianRed), point.X, point.Y, RADIUS, RADIUS);
+        }
     }
 }
