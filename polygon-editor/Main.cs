@@ -22,6 +22,24 @@ namespace polygon_editor
             vertices = new List<Vertex>();
         }
 
+        private void RepaintCanvas()
+        {
+            Size newSize = tableLayoutPanel.GetControlFromPosition(0, 0).Size;
+            drawArea.Dispose();
+            drawArea = new Bitmap(newSize.Width, newSize.Height);
+
+            using (Graphics g = Graphics.FromImage(drawArea))
+            {
+                foreach (var vertex in vertices)
+                {
+                    vertex.paintVertex(g);
+                }
+            }
+            
+            Canvas.Image = drawArea;
+            Canvas.Refresh();
+        }
+
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
@@ -29,13 +47,7 @@ namespace polygon_editor
             var v = new Vertex(e.Location, false);
             vertices.Add(v);
 
-            using (Graphics g = Graphics.FromImage(drawArea))
-            {
-                v.paintVertex(g);
-            }
-
-            Canvas.Image = drawArea;
-            Canvas.Refresh();
+            RepaintCanvas();
         }
     }
 }
