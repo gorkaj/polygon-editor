@@ -34,7 +34,7 @@ namespace polygon_editor
                 foreach (Vertex v in polygon.Vertices)
                 {
                     double dist = Math.Sqrt((pt.X - v.Point.X) * (pt.X - v.Point.X) + (pt.Y - v.Point.Y) * (pt.Y - v.Point.Y));
-                    if (dist <= Vertex.RADIUS)
+                    if (dist <= 2 * Vertex.RADIUS)
                         return v;
                 }
             }
@@ -54,7 +54,7 @@ namespace polygon_editor
                     polygon.Draw(g);
                 }
 
-                if (!polygons[^1].IsFinished)
+                if (polygons.Count > 0 && !polygons[^1].IsFinished && radioButtonAdding.Checked)
                     Edge.DrawEdge(polygons[^1].Vertices[^1].Point, cursorPos, g, Polygon.POLY_PEN);
             }
             
@@ -69,26 +69,32 @@ namespace polygon_editor
             var v = new Vertex(e.Location, false);
             var w = SnapVertex(v.Point);
 
-            if (!isPolyOpen)
+            if (radioButtonAdding.Checked)
             {
-                Polygon poly = new();
-                poly.IsFinished = false;
-                poly.AddVertex(v);
-                this.polygons.Add(poly);
-                isPolyOpen = true;
-            }
-            else
-            {
-                if (w == polygons[^1].Vertices[0])
+                if (polygons.Count > 0 && w != null && w != polygons[^1].Vertices[0])
+                    return;
+
+                if (!isPolyOpen)
                 {
-                    polygons[^1].IsFinished = true;
-                    isPolyOpen = false;
+                    Polygon poly = new();
+                    poly.IsFinished = false;
+                    poly.AddVertex(v);
+                    this.polygons.Add(poly);
+                    isPolyOpen = true;
                 }
                 else
                 {
-                    polygons[^1].AddVertex(v);
-                }
+                    if (w == polygons[^1].Vertices[0])
+                    {
+                        polygons[^1].IsFinished = true;
+                        isPolyOpen = false;
+                    }
+                    else
+                    {
+                        polygons[^1].AddVertex(v);
+                    }
 
+                }
             }
 
             RepaintCanvas();
@@ -99,6 +105,17 @@ namespace polygon_editor
             if(isPolyOpen == false) return;
 
             cursorPos = e.Location;
+            RepaintCanvas();
+        }
+
+        private void Main_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete && radioButtonAdding.Checked && isPolyOpen)
+            {
+                polygons.RemoveAt(polygons.Count - 1);
+                isPolyOpen = false;
+            }
+
             RepaintCanvas();
         }
     }

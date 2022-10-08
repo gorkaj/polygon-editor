@@ -12,7 +12,7 @@ namespace polygon_editor
         private Point point;
         private bool selected;
 
-        public const int RADIUS = 6;
+        public const int RADIUS = 7;
 
         public Vertex(Point point, bool selected)
         {

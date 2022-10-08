@@ -32,9 +32,12 @@
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.rightPanel = new System.Windows.Forms.Panel();
             this.modeGroupBox = new System.Windows.Forms.GroupBox();
+            this.radioButtonEditing = new System.Windows.Forms.RadioButton();
+            this.radioButtonAdding = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.tableLayout.SuspendLayout();
             this.rightPanel.SuspendLayout();
+            this.modeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // Canvas
@@ -75,13 +78,38 @@
             // 
             // modeGroupBox
             // 
+            this.modeGroupBox.Controls.Add(this.radioButtonEditing);
+            this.modeGroupBox.Controls.Add(this.radioButtonAdding);
             this.modeGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.modeGroupBox.Location = new System.Drawing.Point(0, 0);
             this.modeGroupBox.Name = "modeGroupBox";
-            this.modeGroupBox.Size = new System.Drawing.Size(191, 125);
+            this.modeGroupBox.Size = new System.Drawing.Size(191, 100);
             this.modeGroupBox.TabIndex = 0;
             this.modeGroupBox.TabStop = false;
             this.modeGroupBox.Text = "Mode";
+            // 
+            // radioButtonEditing
+            // 
+            this.radioButtonEditing.AutoSize = true;
+            this.radioButtonEditing.Location = new System.Drawing.Point(6, 56);
+            this.radioButtonEditing.Name = "radioButtonEditing";
+            this.radioButtonEditing.Size = new System.Drawing.Size(115, 24);
+            this.radioButtonEditing.TabIndex = 1;
+            this.radioButtonEditing.TabStop = true;
+            this.radioButtonEditing.Text = "Edit polygon";
+            this.radioButtonEditing.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonAdding
+            // 
+            this.radioButtonAdding.AutoSize = true;
+            this.radioButtonAdding.Checked = true;
+            this.radioButtonAdding.Location = new System.Drawing.Point(6, 26);
+            this.radioButtonAdding.Name = "radioButtonAdding";
+            this.radioButtonAdding.Size = new System.Drawing.Size(117, 24);
+            this.radioButtonAdding.TabIndex = 0;
+            this.radioButtonAdding.TabStop = true;
+            this.radioButtonAdding.Text = "Add polygon";
+            this.radioButtonAdding.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -90,12 +118,16 @@
             this.ClientSize = new System.Drawing.Size(982, 703);
             this.Controls.Add(this.tableLayout);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Polygon Editor";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();
             this.tableLayout.ResumeLayout(false);
             this.rightPanel.ResumeLayout(false);
+            this.modeGroupBox.ResumeLayout(false);
+            this.modeGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -105,5 +137,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayout;
         private System.Windows.Forms.Panel rightPanel;
         private System.Windows.Forms.GroupBox modeGroupBox;
+        private System.Windows.Forms.RadioButton radioButtonAdding;
+        private System.Windows.Forms.RadioButton radioButtonEditing;
     }
 }
