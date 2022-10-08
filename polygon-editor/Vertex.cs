@@ -12,7 +12,7 @@ namespace polygon_editor
         private Point point;
         private bool selected;
 
-        private const int RADIUS = 13;
+        public const int RADIUS = 6;
 
         public Vertex(Point point, bool selected)
         {
@@ -20,12 +20,12 @@ namespace polygon_editor
             this.selected = selected;
         }
 
-        public Point Point { get; set; }
-        public bool Selected { get; set; }
+        public Point Point { get => point; set => point = value; }
+        public bool Selected { get => selected; set => selected = value; }
 
-        public void paintVertex(Graphics g)
+        public void Draw(Graphics g)
         {
-            g.FillEllipse(new SolidBrush(Color.IndianRed), point.X, point.Y, RADIUS, RADIUS);
+            g.FillEllipse(new SolidBrush(Color.IndianRed), point.X - RADIUS, point.Y - RADIUS, RADIUS * 2, RADIUS * 2);
         }
     }
 }

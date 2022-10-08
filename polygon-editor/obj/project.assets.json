@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jakub\\OneDrive\\Pulpit\\Studia\\GK\\polygon-editor\\polygon-editor\\polygon-editor.csproj",
+      "projectUniqueName": "C:\\Users\\jakub\\Desktop\\Studia\\GK\\polygon-editor\\polygon-editor\\polygon-editor.csproj",
       "projectName": "polygon-editor",
-      "projectPath": "C:\\Users\\jakub\\OneDrive\\Pulpit\\Studia\\GK\\polygon-editor\\polygon-editor\\polygon-editor.csproj",
+      "projectPath": "C:\\Users\\jakub\\Desktop\\Studia\\GK\\polygon-editor\\polygon-editor\\polygon-editor.csproj",
       "packagesPath": "C:\\Users\\jakub\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jakub\\OneDrive\\Pulpit\\Studia\\GK\\polygon-editor\\polygon-editor\\obj\\",
+      "outputPath": "C:\\Users\\jakub\\Desktop\\Studia\\GK\\polygon-editor\\polygon-editor\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jakub\\AppData\\Roaming\\NuGet\\NuGet.Config",
