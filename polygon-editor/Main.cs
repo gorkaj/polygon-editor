@@ -134,7 +134,7 @@ namespace polygon_editor
                     polygon.Draw(g);
                 }
 
-                if (polygons.Count > 0 && !polygons[^1].IsFinished && radioButtonAdding.Checked)
+                if (!polygons[^1].IsFinished && radioButtonAdding.Checked)
                     Edge.DrawEdge(polygons[^1].Vertices[^1].Point, cursorPos, g, Polygon.POLY_PEN);
             }
             

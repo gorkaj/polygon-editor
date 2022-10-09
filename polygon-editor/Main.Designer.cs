@@ -31,12 +31,16 @@
             this.Canvas = new System.Windows.Forms.PictureBox();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.rightPanel = new System.Windows.Forms.Panel();
+            this.algoGroupBox = new System.Windows.Forms.GroupBox();
+            this.radioButtonBresenhamAlgo = new System.Windows.Forms.RadioButton();
+            this.radioButtonSystemAlgo = new System.Windows.Forms.RadioButton();
             this.modeGroupBox = new System.Windows.Forms.GroupBox();
             this.radioButtonEditing = new System.Windows.Forms.RadioButton();
             this.radioButtonAdding = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.tableLayout.SuspendLayout();
             this.rightPanel.SuspendLayout();
+            this.algoGroupBox.SuspendLayout();
             this.modeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,12 +75,47 @@
             // rightPanel
             // 
             this.rightPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.rightPanel.Controls.Add(this.algoGroupBox);
             this.rightPanel.Controls.Add(this.modeGroupBox);
             this.rightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rightPanel.Location = new System.Drawing.Point(788, 3);
             this.rightPanel.Name = "rightPanel";
             this.rightPanel.Size = new System.Drawing.Size(191, 697);
             this.rightPanel.TabIndex = 1;
+            // 
+            // algoGroupBox
+            // 
+            this.algoGroupBox.Controls.Add(this.radioButtonBresenhamAlgo);
+            this.algoGroupBox.Controls.Add(this.radioButtonSystemAlgo);
+            this.algoGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.algoGroupBox.Location = new System.Drawing.Point(0, 100);
+            this.algoGroupBox.Name = "algoGroupBox";
+            this.algoGroupBox.Size = new System.Drawing.Size(191, 100);
+            this.algoGroupBox.TabIndex = 1;
+            this.algoGroupBox.TabStop = false;
+            this.algoGroupBox.Text = "Drawing algorithm";
+            // 
+            // radioButtonBresenhamAlgo
+            // 
+            this.radioButtonBresenhamAlgo.AutoSize = true;
+            this.radioButtonBresenhamAlgo.Location = new System.Drawing.Point(11, 61);
+            this.radioButtonBresenhamAlgo.Name = "radioButtonBresenhamAlgo";
+            this.radioButtonBresenhamAlgo.Size = new System.Drawing.Size(172, 24);
+            this.radioButtonBresenhamAlgo.TabIndex = 1;
+            this.radioButtonBresenhamAlgo.Text = "Bresenham algorithm";
+            this.radioButtonBresenhamAlgo.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonSystemAlgo
+            // 
+            this.radioButtonSystemAlgo.AutoSize = true;
+            this.radioButtonSystemAlgo.Checked = true;
+            this.radioButtonSystemAlgo.Location = new System.Drawing.Point(11, 31);
+            this.radioButtonSystemAlgo.Name = "radioButtonSystemAlgo";
+            this.radioButtonSystemAlgo.Size = new System.Drawing.Size(146, 24);
+            this.radioButtonSystemAlgo.TabIndex = 0;
+            this.radioButtonSystemAlgo.TabStop = true;
+            this.radioButtonSystemAlgo.Text = "System algorithm";
+            this.radioButtonSystemAlgo.UseVisualStyleBackColor = true;
             // 
             // modeGroupBox
             // 
@@ -120,8 +159,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 703);
             this.Controls.Add(this.tableLayout);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
+            this.MinimumSize = new System.Drawing.Size(1000, 750);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Polygon Editor";
@@ -129,6 +168,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();
             this.tableLayout.ResumeLayout(false);
             this.rightPanel.ResumeLayout(false);
+            this.algoGroupBox.ResumeLayout(false);
+            this.algoGroupBox.PerformLayout();
             this.modeGroupBox.ResumeLayout(false);
             this.modeGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -142,5 +183,8 @@
         private System.Windows.Forms.GroupBox modeGroupBox;
         private System.Windows.Forms.RadioButton radioButtonAdding;
         private System.Windows.Forms.RadioButton radioButtonEditing;
+        private System.Windows.Forms.GroupBox algoGroupBox;
+        private System.Windows.Forms.RadioButton radioButtonBresenhamAlgo;
+        private System.Windows.Forms.RadioButton radioButtonSystemAlgo;
     }
 }
