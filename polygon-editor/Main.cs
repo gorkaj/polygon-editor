@@ -116,6 +116,11 @@ namespace polygon_editor
             v.Point = new Point(newPos.Item1, newPos.Item2);
         }
 
+        private Point MidPoint(Point p1, Point p2)
+        {
+            return new Point((p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2);
+        }
+
         private void RepaintCanvas()
         {
             Size newSize = tableLayout.GetControlFromPosition(0, 0).Size;
@@ -163,8 +168,15 @@ namespace polygon_editor
                     {
                         if (w == polygons[^1].Vertices[0])
                         {
-                            polygons[^1].IsFinished = true;
-                            isPolyOpen = false;
+                            if(polygons[^1].Vertices.Count > 2)
+                            {
+                                polygons[^1].IsFinished = true;
+                                isPolyOpen = false;
+                            }
+                            else
+                            {
+                                return;
+                            }
                         }
                         else
                         {
@@ -213,6 +225,8 @@ namespace polygon_editor
                             if(poly.Vertices.Contains(w))
                             {
                                 poly.Vertices.Remove(w);
+                                if(poly.Vertices.Count <= 2)
+                                    polygons.Remove(poly);
                                 break;
                             }
                         }
@@ -262,6 +276,31 @@ namespace polygon_editor
                 foreach (Vertex v in polygon.Vertices)
                 {
                     v.Selected = false;
+                }
+            }
+        }
+
+        private void Canvas_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if(radioButtonEditing.Checked)
+            {
+                var edge = SnapEdge(e.Location);
+
+                if (edge == null) return;
+                var u = edge.Value.start;
+                var v = edge.Value.end;
+                
+                foreach(var poly in polygons)
+                {
+                    for(int i = 0; i < poly.Vertices.Count; i++)
+                    {
+                        if(poly.Vertices[i] == u)
+                        {
+                            var vert = new Vertex(MidPoint(u.Point, v.Point), false);
+                            poly.Vertices.Insert(i + 1, vert);
+                            break;
+                        }
+                    }
                 }
             }
         }
