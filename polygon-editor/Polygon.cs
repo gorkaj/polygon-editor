@@ -9,7 +9,7 @@ namespace polygon_editor
 {
     public class Polygon
     {
-        public static int EDGE_WIDTH = 2;
+        public static int EDGE_WIDTH = 3;
         public static Pen POLY_PEN = new Pen(new SolidBrush(Color.IndianRed), EDGE_WIDTH);
 
         private List<Vertex> vertices;

@@ -50,6 +50,7 @@
             this.Canvas.TabStop = false;
             this.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
             this.Canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
+            this.Canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             // 
             // tableLayout
             // 
@@ -98,6 +99,7 @@
             this.radioButtonEditing.TabStop = true;
             this.radioButtonEditing.Text = "Edit polygon";
             this.radioButtonEditing.UseVisualStyleBackColor = true;
+            this.radioButtonEditing.CheckedChanged += new System.EventHandler(this.radioButtonEditing_CheckedChanged);
             // 
             // radioButtonAdding
             // 
