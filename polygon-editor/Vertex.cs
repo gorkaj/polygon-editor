@@ -25,7 +25,7 @@ namespace polygon_editor
 
         public void Draw(Graphics g)
         {
-            g.FillEllipse(new SolidBrush(Color.IndianRed), point.X - RADIUS, point.Y - RADIUS, RADIUS * 2, RADIUS * 2);
+            g.FillEllipse(new SolidBrush(Color.Black), point.X - RADIUS, point.Y - RADIUS, RADIUS * 2, RADIUS * 2);
         }
     }
 }

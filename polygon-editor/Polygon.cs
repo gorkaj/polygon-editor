@@ -10,7 +10,7 @@ namespace polygon_editor
     public class Polygon
     {
         public static int EDGE_WIDTH = 3;
-        public static Pen POLY_PEN = new Pen(new SolidBrush(Color.IndianRed), EDGE_WIDTH);
+        public static Pen POLY_PEN = new Pen(new SolidBrush(Color.Black), EDGE_WIDTH);
 
         private List<Vertex> vertices;
         private bool isFinished;
@@ -29,13 +29,19 @@ namespace polygon_editor
             vertices.Add(v);
         }
 
-        public void Draw(Graphics g)
+        public void Draw(Graphics g, bool useSystemDrawing)
         {
             for (int i=0; i < vertices.Count; i++)
             {
                 vertices[i].Draw(g);
                 if (i < vertices.Count -1 || isFinished)
-                    Edge.DrawEdge(vertices[i].Point, vertices[(i + 1) % vertices.Count].Point, g, POLY_PEN);
+                {
+                    if (useSystemDrawing)
+                        Edge.DrawEdge(vertices[i].Point, vertices[(i + 1) % vertices.Count].Point, g, POLY_PEN);
+                    else
+                        Edge.DrawEdgeBresenham(vertices[i].Point, vertices[(i + 1) % vertices.Count].Point, g, POLY_PEN);
+                }
+                    
             }
         }
 

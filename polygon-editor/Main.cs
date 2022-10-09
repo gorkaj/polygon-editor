@@ -131,11 +131,16 @@ namespace polygon_editor
             {
                 foreach(Polygon polygon in polygons)
                 {
-                    polygon.Draw(g);
+                    polygon.Draw(g, radioButtonSystemAlgo.Checked);
                 }
 
-                if (!polygons[^1].IsFinished && radioButtonAdding.Checked)
-                    Edge.DrawEdge(polygons[^1].Vertices[^1].Point, cursorPos, g, Polygon.POLY_PEN);
+                if (polygons.Count > 0 && !polygons[^1].IsFinished && radioButtonAdding.Checked)
+                {
+                    if (radioButtonSystemAlgo.Checked)
+                        Edge.DrawEdge(polygons[^1].Vertices[^1].Point, cursorPos, g, Polygon.POLY_PEN);
+                    else
+                        Edge.DrawEdgeBresenham(polygons[^1].Vertices[^1].Point, cursorPos, g, Polygon.POLY_PEN);
+                }
             }
             
             Canvas.Image = drawArea;
@@ -240,6 +245,7 @@ namespace polygon_editor
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Left) return;
             // Mock edge tracking
             if (radioButtonAdding.Checked && isPolyOpen == false) return;
 

@@ -184,7 +184,7 @@
         private System.Windows.Forms.RadioButton radioButtonAdding;
         private System.Windows.Forms.RadioButton radioButtonEditing;
         private System.Windows.Forms.GroupBox algoGroupBox;
-        private System.Windows.Forms.RadioButton radioButtonBresenhamAlgo;
+        public System.Windows.Forms.RadioButton radioButtonBresenhamAlgo;
         private System.Windows.Forms.RadioButton radioButtonSystemAlgo;
     }
 }
