@@ -18,17 +18,20 @@ namespace polygon_editor
         private Point previousCursorPos;
 
         private bool isPolyOpen;
+        private List<EdgeLengthConstraint> edgeLengthConstraints;
+        private Vertex? movingVertex;
 
         public Main()
         {
             InitializeComponent();
             drawArea = new Bitmap(Canvas.Width, Canvas.Height);
-            polygons = new List<Polygon>();
-
+            polygons = new();
+            edgeLengthConstraints = new();
+            movingVertex = null;
             isPolyOpen = false;
         }
 
-        private double Distance(Point p1, Point p2)
+        public static double Distance(Point p1, Point p2)
         {
             return Math.Sqrt((p1.X - p2.X) * (p1.X - p2.X) + (p1.Y - p2.Y) * (p1.Y - p2.Y));
         }
@@ -92,6 +95,17 @@ namespace polygon_editor
             isPolyOpen = false;
         }
 
+        private void MovePointOnEdge(Vertex start, Vertex end, double newLength)
+        {
+            double oldLength = Distance(start.Point, end.Point);
+            var ratio = newLength / oldLength;
+
+            var vector = (end.Point.X - start.Point.X, end.Point.Y - start.Point.Y);
+            vector = ((int)(ratio * vector.Item1), (int)(ratio * vector.Item2));
+
+            end.Point = new Point(start.Point.X + vector.Item1, start.Point.Y + vector.Item2);
+        }
+
         private void MoveVertices()
         {
             int dx = cursorPos.X - previousCursorPos.X;
@@ -120,11 +134,16 @@ namespace polygon_editor
             return new Point((p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2);
         }
 
-        private int showEdgeLengthDialog(Vertex v1, Vertex v2)
+        private double showEdgeLengthDialog(Vertex v1, Vertex v2)
         {
             var response = PopupDialog.ShowDialog("New edge length", "Set fixed length for the edge", 
                 Math.Round(Distance(v1.Point, v2.Point), 1));
-            return 1;
+
+            if (response == null)
+                return -1;
+            response.Replace(",", ".");
+
+            return double.Parse(response);
         }
 
         private void RepaintCanvas()
@@ -205,6 +224,7 @@ namespace polygon_editor
 
                     if (w != null)
                     {
+                        movingVertex = w;
                         previousCursorPos = e.Location;
                         w.Selected = true;
                     }
@@ -230,8 +250,10 @@ namespace polygon_editor
                     if (edge == null)
                         return;
 
-                    // TODO
-                    showEdgeLengthDialog(edge.Value.start, edge.Value.end);
+                    double newLength = showEdgeLengthDialog(edge.Value.start, edge.Value.end);
+                    edgeLengthConstraints.Add(new EdgeLengthConstraint(edge.Value.start, edge.Value.end, newLength));
+
+                    //MovePointOnEdge(edge.Value.start, edge.Value.end, newLength);
                 }
             }
 
@@ -266,8 +288,16 @@ namespace polygon_editor
             // Mock edge tracking
             if (radioButtonAdding.Checked && isPolyOpen == false) return;
 
+            var w = SnapVertex(e.Location);
+
             cursorPos = e.Location;
             MoveVertices();
+
+            foreach(var constraint in edgeLengthConstraints)
+            {
+                constraint.ApplyConstraint(movingVertex != null && movingVertex == constraint.End);
+            }
+
             previousCursorPos = cursorPos;
 
             RepaintCanvas();
@@ -294,6 +324,7 @@ namespace polygon_editor
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
+            movingVertex = null;
             foreach (Polygon polygon in polygons)
             {
                 foreach (Vertex v in polygon.Vertices)
@@ -326,6 +357,17 @@ namespace polygon_editor
                     }
                 }
             }
+        }
+
+        private void radioButtonSystemAlgo_CheckedChanged(object sender, EventArgs e)
+        {
+            RepaintCanvas();
+        }
+
+        private void clearConstraintsBtn_Click(object sender, EventArgs e)
+        {
+            edgeLengthConstraints.Clear();
+            RepaintCanvas();
         }
     }
 }

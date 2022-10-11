@@ -35,9 +35,10 @@
             this.radioButtonBresenhamAlgo = new System.Windows.Forms.RadioButton();
             this.radioButtonSystemAlgo = new System.Windows.Forms.RadioButton();
             this.modeGroupBox = new System.Windows.Forms.GroupBox();
+            this.radioButtonConstraints = new System.Windows.Forms.RadioButton();
             this.radioButtonEditing = new System.Windows.Forms.RadioButton();
             this.radioButtonAdding = new System.Windows.Forms.RadioButton();
-            this.radioButtonConstraints = new System.Windows.Forms.RadioButton();
+            this.clearConstraintsBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.tableLayout.SuspendLayout();
             this.rightPanel.SuspendLayout();
@@ -76,6 +77,7 @@
             // rightPanel
             // 
             this.rightPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.rightPanel.Controls.Add(this.clearConstraintsBtn);
             this.rightPanel.Controls.Add(this.algoGroupBox);
             this.rightPanel.Controls.Add(this.modeGroupBox);
             this.rightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -88,8 +90,8 @@
             // 
             this.algoGroupBox.Controls.Add(this.radioButtonBresenhamAlgo);
             this.algoGroupBox.Controls.Add(this.radioButtonSystemAlgo);
-            this.algoGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.algoGroupBox.Location = new System.Drawing.Point(0, 119);
+            this.algoGroupBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.algoGroupBox.Location = new System.Drawing.Point(0, 597);
             this.algoGroupBox.Name = "algoGroupBox";
             this.algoGroupBox.Size = new System.Drawing.Size(191, 100);
             this.algoGroupBox.TabIndex = 1;
@@ -117,6 +119,7 @@
             this.radioButtonSystemAlgo.TabStop = true;
             this.radioButtonSystemAlgo.Text = "System algorithm";
             this.radioButtonSystemAlgo.UseVisualStyleBackColor = true;
+            this.radioButtonSystemAlgo.CheckedChanged += new System.EventHandler(this.radioButtonSystemAlgo_CheckedChanged);
             // 
             // modeGroupBox
             // 
@@ -130,6 +133,17 @@
             this.modeGroupBox.TabIndex = 0;
             this.modeGroupBox.TabStop = false;
             this.modeGroupBox.Text = "Mode";
+            // 
+            // radioButtonConstraints
+            // 
+            this.radioButtonConstraints.AutoSize = true;
+            this.radioButtonConstraints.Location = new System.Drawing.Point(6, 86);
+            this.radioButtonConstraints.Name = "radioButtonConstraints";
+            this.radioButtonConstraints.Size = new System.Drawing.Size(133, 24);
+            this.radioButtonConstraints.TabIndex = 2;
+            this.radioButtonConstraints.TabStop = true;
+            this.radioButtonConstraints.Text = "Add constraints";
+            this.radioButtonConstraints.UseVisualStyleBackColor = true;
             // 
             // radioButtonEditing
             // 
@@ -155,16 +169,15 @@
             this.radioButtonAdding.Text = "Add polygon";
             this.radioButtonAdding.UseVisualStyleBackColor = true;
             // 
-            // radioButtonConstraints
+            // clearConstraintsBtn
             // 
-            this.radioButtonConstraints.AutoSize = true;
-            this.radioButtonConstraints.Location = new System.Drawing.Point(6, 86);
-            this.radioButtonConstraints.Name = "radioButtonConstraints";
-            this.radioButtonConstraints.Size = new System.Drawing.Size(133, 24);
-            this.radioButtonConstraints.TabIndex = 2;
-            this.radioButtonConstraints.TabStop = true;
-            this.radioButtonConstraints.Text = "Add constraints";
-            this.radioButtonConstraints.UseVisualStyleBackColor = true;
+            this.clearConstraintsBtn.Location = new System.Drawing.Point(22, 125);
+            this.clearConstraintsBtn.Name = "clearConstraintsBtn";
+            this.clearConstraintsBtn.Size = new System.Drawing.Size(146, 40);
+            this.clearConstraintsBtn.TabIndex = 2;
+            this.clearConstraintsBtn.Text = "Remove constraints";
+            this.clearConstraintsBtn.UseVisualStyleBackColor = true;
+            this.clearConstraintsBtn.Click += new System.EventHandler(this.clearConstraintsBtn_Click);
             // 
             // Main
             // 
@@ -200,5 +213,6 @@
         public System.Windows.Forms.RadioButton radioButtonBresenhamAlgo;
         private System.Windows.Forms.RadioButton radioButtonSystemAlgo;
         private System.Windows.Forms.RadioButton radioButtonConstraints;
+        private System.Windows.Forms.Button clearConstraintsBtn;
     }
 }
