@@ -17,7 +17,6 @@ namespace polygon_editor
         private Point cursorPos;
         private Point previousCursorPos;
 
-        // flags
         private bool isPolyOpen;
 
         public Main()
@@ -121,6 +120,13 @@ namespace polygon_editor
             return new Point((p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2);
         }
 
+        private int showEdgeLengthDialog(Vertex v1, Vertex v2)
+        {
+            var response = PopupDialog.ShowDialog("New edge length", "Set fixed length for the edge", 
+                Math.Round(Distance(v1.Point, v2.Point), 1));
+            return 1;
+        }
+
         private void RepaintCanvas()
         {
             Size newSize = tableLayout.GetControlFromPosition(0, 0).Size;
@@ -216,7 +222,19 @@ namespace polygon_editor
                     }
 
                 }
+
+                // Constraints mode
+                else if (radioButtonConstraints.Checked)
+                {
+                    var edge = SnapEdge(e.Location);
+                    if (edge == null)
+                        return;
+
+                    // TODO
+                    showEdgeLengthDialog(edge.Value.start, edge.Value.end);
+                }
             }
+
             //Right Mouse Button
             if (e.Button == MouseButtons.Right)
             {
@@ -245,7 +263,6 @@ namespace polygon_editor
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left) return;
             // Mock edge tracking
             if (radioButtonAdding.Checked && isPolyOpen == false) return;
 

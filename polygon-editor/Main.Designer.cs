@@ -37,6 +37,7 @@
             this.modeGroupBox = new System.Windows.Forms.GroupBox();
             this.radioButtonEditing = new System.Windows.Forms.RadioButton();
             this.radioButtonAdding = new System.Windows.Forms.RadioButton();
+            this.radioButtonConstraints = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.tableLayout.SuspendLayout();
             this.rightPanel.SuspendLayout();
@@ -88,7 +89,7 @@
             this.algoGroupBox.Controls.Add(this.radioButtonBresenhamAlgo);
             this.algoGroupBox.Controls.Add(this.radioButtonSystemAlgo);
             this.algoGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.algoGroupBox.Location = new System.Drawing.Point(0, 100);
+            this.algoGroupBox.Location = new System.Drawing.Point(0, 119);
             this.algoGroupBox.Name = "algoGroupBox";
             this.algoGroupBox.Size = new System.Drawing.Size(191, 100);
             this.algoGroupBox.TabIndex = 1;
@@ -119,12 +120,13 @@
             // 
             // modeGroupBox
             // 
+            this.modeGroupBox.Controls.Add(this.radioButtonConstraints);
             this.modeGroupBox.Controls.Add(this.radioButtonEditing);
             this.modeGroupBox.Controls.Add(this.radioButtonAdding);
             this.modeGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.modeGroupBox.Location = new System.Drawing.Point(0, 0);
             this.modeGroupBox.Name = "modeGroupBox";
-            this.modeGroupBox.Size = new System.Drawing.Size(191, 100);
+            this.modeGroupBox.Size = new System.Drawing.Size(191, 119);
             this.modeGroupBox.TabIndex = 0;
             this.modeGroupBox.TabStop = false;
             this.modeGroupBox.Text = "Mode";
@@ -152,6 +154,17 @@
             this.radioButtonAdding.TabStop = true;
             this.radioButtonAdding.Text = "Add polygon";
             this.radioButtonAdding.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonConstraints
+            // 
+            this.radioButtonConstraints.AutoSize = true;
+            this.radioButtonConstraints.Location = new System.Drawing.Point(6, 86);
+            this.radioButtonConstraints.Name = "radioButtonConstraints";
+            this.radioButtonConstraints.Size = new System.Drawing.Size(133, 24);
+            this.radioButtonConstraints.TabIndex = 2;
+            this.radioButtonConstraints.TabStop = true;
+            this.radioButtonConstraints.Text = "Add constraints";
+            this.radioButtonConstraints.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -186,5 +199,6 @@
         private System.Windows.Forms.GroupBox algoGroupBox;
         public System.Windows.Forms.RadioButton radioButtonBresenhamAlgo;
         private System.Windows.Forms.RadioButton radioButtonSystemAlgo;
+        private System.Windows.Forms.RadioButton radioButtonConstraints;
     }
 }
