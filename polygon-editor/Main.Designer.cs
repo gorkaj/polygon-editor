@@ -31,6 +31,7 @@
             this.Canvas = new System.Windows.Forms.PictureBox();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.rightPanel = new System.Windows.Forms.Panel();
+            this.clearConstraintsBtn = new System.Windows.Forms.Button();
             this.algoGroupBox = new System.Windows.Forms.GroupBox();
             this.radioButtonBresenhamAlgo = new System.Windows.Forms.RadioButton();
             this.radioButtonSystemAlgo = new System.Windows.Forms.RadioButton();
@@ -38,7 +39,6 @@
             this.radioButtonConstraints = new System.Windows.Forms.RadioButton();
             this.radioButtonEditing = new System.Windows.Forms.RadioButton();
             this.radioButtonAdding = new System.Windows.Forms.RadioButton();
-            this.clearConstraintsBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.tableLayout.SuspendLayout();
             this.rightPanel.SuspendLayout();
@@ -85,6 +85,18 @@
             this.rightPanel.Name = "rightPanel";
             this.rightPanel.Size = new System.Drawing.Size(191, 697);
             this.rightPanel.TabIndex = 1;
+            // 
+            // clearConstraintsBtn
+            // 
+            this.clearConstraintsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.clearConstraintsBtn.Location = new System.Drawing.Point(22, 125);
+            this.clearConstraintsBtn.Name = "clearConstraintsBtn";
+            this.clearConstraintsBtn.Size = new System.Drawing.Size(146, 40);
+            this.clearConstraintsBtn.TabIndex = 2;
+            this.clearConstraintsBtn.Text = "Remove constraints";
+            this.clearConstraintsBtn.UseVisualStyleBackColor = true;
+            this.clearConstraintsBtn.Click += new System.EventHandler(this.clearConstraintsBtn_Click);
             // 
             // algoGroupBox
             // 
@@ -168,16 +180,6 @@
             this.radioButtonAdding.TabStop = true;
             this.radioButtonAdding.Text = "Add polygon";
             this.radioButtonAdding.UseVisualStyleBackColor = true;
-            // 
-            // clearConstraintsBtn
-            // 
-            this.clearConstraintsBtn.Location = new System.Drawing.Point(22, 125);
-            this.clearConstraintsBtn.Name = "clearConstraintsBtn";
-            this.clearConstraintsBtn.Size = new System.Drawing.Size(146, 40);
-            this.clearConstraintsBtn.TabIndex = 2;
-            this.clearConstraintsBtn.Text = "Remove constraints";
-            this.clearConstraintsBtn.UseVisualStyleBackColor = true;
-            this.clearConstraintsBtn.Click += new System.EventHandler(this.clearConstraintsBtn_Click);
             // 
             // Main
             // 

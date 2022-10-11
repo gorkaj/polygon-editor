@@ -48,5 +48,11 @@ namespace polygon_editor
             }
 
         }
+
+        public bool ContainsBoth(List<Vertex> vertices)
+        {
+            return vertices.Contains(start) && vertices.Contains(end);
+        }
+
     }
 }

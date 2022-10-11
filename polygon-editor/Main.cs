@@ -288,8 +288,6 @@ namespace polygon_editor
             // Mock edge tracking
             if (radioButtonAdding.Checked && isPolyOpen == false) return;
 
-            var w = SnapVertex(e.Location);
-
             cursorPos = e.Location;
             MoveVertices();
 
@@ -352,6 +350,9 @@ namespace polygon_editor
                         {
                             var vert = new Vertex(MidPoint(u.Point, v.Point), false);
                             poly.Vertices.Insert(i + 1, vert);
+
+                            
+
                             break;
                         }
                     }
