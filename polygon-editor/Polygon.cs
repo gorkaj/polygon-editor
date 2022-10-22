@@ -45,5 +45,29 @@ namespace polygon_editor
             }
         }
 
+        public bool IsFullyConstrained(List<EdgeLengthConstraint> constraints)
+        {
+            for (int i = 0; i < vertices.Count; i++)
+            {
+                var u = vertices[i];
+                var v = vertices[(i + 1) % vertices.Count];
+                bool found = false;
+
+                foreach (var constraint in constraints)
+                {
+                    if (constraint.ContainsBoth(new List<Vertex>() { u, v }))
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                    return false;
+            }
+
+            return true;
+        }
+
     }
 }

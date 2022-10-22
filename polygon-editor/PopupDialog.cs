@@ -9,7 +9,7 @@ namespace polygon_editor
 {
     public static class PopupDialog
     {
-        public static string ShowDialog(string text, string caption, double initValue)
+        public static string? ShowDialog(string text, string caption, double initValue)
         {
             Form prompt = new Form()
             {
@@ -28,7 +28,7 @@ namespace polygon_editor
             prompt.Controls.Add(textLabel);
             prompt.AcceptButton = confirmation;
 
-            return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
+            return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : null;
         }
     }
 }
