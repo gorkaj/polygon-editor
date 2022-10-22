@@ -351,7 +351,7 @@ namespace polygon_editor
                             var vert = new Vertex(MidPoint(u.Point, v.Point), false);
                             poly.Vertices.Insert(i + 1, vert);
 
-                            
+                            edgeLengthConstraints.RemoveAll(constraint => constraint.ContainsBoth(new List<Vertex>() { u, v}));
 
                             break;
                         }
