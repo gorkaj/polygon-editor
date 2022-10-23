@@ -45,8 +45,10 @@ namespace polygon_editor
             }
         }
 
-        public bool IsFullyConstrained(List<EdgeLengthConstraint> constraints)
+        public (bool, List<EdgeLengthConstraint>) IsFullyConstrained(List<EdgeLengthConstraint> constraints)
         {
+            List<EdgeLengthConstraint> con = new List<EdgeLengthConstraint>();
+
             for (int i = 0; i < vertices.Count; i++)
             {
                 var u = vertices[i];
@@ -58,15 +60,16 @@ namespace polygon_editor
                     if (constraint.ContainsBoth(new List<Vertex>() { u, v }))
                     {
                         found = true;
+                        con.Add(constraint);
                         break;
                     }
                 }
 
                 if (!found)
-                    return false;
+                    return (false, con);
             }
 
-            return true;
+            return (true, con);
         }
 
     }

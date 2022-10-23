@@ -116,7 +116,7 @@ namespace polygon_editor
             return (false, 0);
         }
 
-        public void ApplyConstraint(bool adjustLength, bool swapVertices)
+        public void ApplyConstraint(bool adjustLength)
         {
             if (edges.Count < 2)
                 return;
@@ -126,8 +126,8 @@ namespace polygon_editor
 
             for (int i = 1; i < edges.Count; ++i)
             {
-                int a = /* swapVertices ? edges[i].v.Point.X : */ edges[i].u.Point.X;
-                int b = /* swapVertices ? edges[i].v.Point.Y : */ edges[i].u.Point.Y;
+                int a = edges[i].u.Point.X;
+                int b = edges[i].u.Point.Y;
                 Vertex u = edges[i].u;
                 Vertex v = edges[i].v;
 
@@ -143,17 +143,14 @@ namespace polygon_editor
                 }
                 else
                 {
-                    newX = /*swapVertices ? u.Point.X :*/ v.Point.X;
-                    newY = (int)(tan * (/*swapVertices ? u.Point.X :*/ v.Point.X - a)) + b;
+                    newX = v.Point.X;
+                    newY = (int)(tan * (v.Point.X - a)) + b;
                 }
 
-                if (newX > 1073740288 || newX < -1073740288 || newY > 1073740288 || newY < -1073740288)
+                if (newX > 1e8 || newX < -1e8 || newY > 1e8 || newY < -1e8)
                     return;
 
-                if (swapVertices)
-                    v.Point = new Point(newX, newY);
-                else
-                    v.Point = new Point(newX, newY);
+                v.Point = new Point(newX, newY);
             }
         }
     }

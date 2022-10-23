@@ -72,6 +72,7 @@ namespace polygon_editor
             var pc = new ParallelConstraint(new List<(Vertex, Vertex)>() { (v3, v4) }, 1);
             pc.Edges.Add((v5, v6));
             parallelConstraints.Add(pc);
+            pc.Extendable = false;
             //pc.ApplyConstraint(true, false);
 
             polygons.Add(poly1);
@@ -137,17 +138,6 @@ namespace polygon_editor
             isPolyOpen = false;
         }
 
-        private void MovePointOnEdge(Vertex start, Vertex end, double newLength)
-        {
-            double oldLength = Distance(start.Point, end.Point);
-            var ratio = newLength / oldLength;
-
-            var vector = (end.Point.X - start.Point.X, end.Point.Y - start.Point.Y);
-            vector = ((int)(ratio * vector.Item1), (int)(ratio * vector.Item2));
-
-            end.Point = new Point(start.Point.X + vector.Item1, start.Point.Y + vector.Item2);
-        }
-
         private void MoveVertices()
         {
             int dx = cursorPos.X - previousCursorPos.X;
@@ -179,13 +169,13 @@ namespace polygon_editor
         private double showEdgeLengthDialog(Vertex v1, Vertex v2)
         {
             var response = PopupDialog.ShowDialog("New edge length", "Set fixed length for the edge", 
-                Math.Round(Distance(v1.Point, v2.Point), 1));
+                (int)(Distance(v1.Point, v2.Point)) + 1);
 
             if (response == null)
                 return -1;
             response.Replace(",", ".");
 
-            return double.Parse(response);
+            return Double.Parse(response);
         }
 
         private void RepaintCanvas()
@@ -305,9 +295,32 @@ namespace polygon_editor
                     edgeLengthConstraints.RemoveAll
                         (constraint => constraint.ContainsBoth(new List<Vertex>() { edge.Value.start, edge.Value.end }));
 
-                    var c = new EdgeLengthConstraint(edge.Value.start, edge.Value.end, newLength);
+                    var c = new EdgeLengthConstraint(edge.Value.start, edge.Value.end, (int)newLength);
                     edgeLengthConstraints.Add(c);
-                    edgeLengthConstraints.Add(c);
+
+                    var poly = SnapPolygon(e.Location);
+                    if (poly != null && poly.Vertices.Count == 3 && poly.IsFullyConstrained(edgeLengthConstraints).Item1)
+                    {
+                        var list = poly.IsFullyConstrained(edgeLengthConstraints).Item2;
+                        list.Remove(c);
+                        if (list.Count < 2)
+                        {
+                            c.ApplyConstraint(movingVertex != null && movingVertex == c.End);
+                            RepaintCanvas();
+                            return;
+                        }
+
+                        var mini = list.Min(el => el.Length);
+                        var maxi = list.Max(el => el.Length);
+
+                        if (newLength <= maxi - mini || newLength >= maxi + mini)
+                        {
+                            edgeLengthConstraints.Remove(c);
+                            RepaintCanvas();
+                            return;
+                        }
+                    }
+
                     c.ApplyConstraint(movingVertex != null && movingVertex == c.End);
                 }
             }
@@ -358,7 +371,7 @@ namespace polygon_editor
                         var c = new ParallelConstraint(new List<(Vertex u, Vertex v)>()
                         { (edge.Value.start, edge.Value.end) }, parallelConstraints.Count + 1);
                         parallelConstraints.Add(c);
-                        c.ApplyConstraint(true, false);
+                        c.ApplyConstraint(true);
                         extendParallel = true;
                     }
                     else
@@ -369,7 +382,7 @@ namespace polygon_editor
                             {
                                 constraint.Extendable = false;
                                 constraint.Edges.Add((edge.Value.start, edge.Value.end));
-                                constraint.ApplyConstraint(true, false);
+                                constraint.ApplyConstraint(true);
                                 extendParallel = false;
                                 break;
                             }
@@ -404,20 +417,6 @@ namespace polygon_editor
             if (!found && isPolyOpen == false)
                 return;
 
-            //foreach(var poly in polygons)
-            //{
-            //    if(poly.IsFullyConstrained(edgeLengthConstraints))
-            //    {
-            //        cursorPos = e.Location;
-            //        MoveVertices();
-
-            //        previousCursorPos = cursorPos;
-
-            //        RepaintCanvas();
-            //        return;
-            //    }
-            //}
-
             foreach(var constraint in edgeLengthConstraints)
             {
                 constraint.ApplyConstraint(movingVertex != null && movingVertex == constraint.End);
@@ -425,7 +424,7 @@ namespace polygon_editor
 
             foreach(var constraint in parallelConstraints)
             {
-                constraint.ApplyConstraint(false, movingVertex != null && constraint.ContainsVertex(movingVertex).Item2 == 1);
+                constraint.ApplyConstraint(false);
             }
             
 
