@@ -1,0 +1,32 @@
+How to use Polygon Editor?
+
+The application layout is divided into two parts:
+	- the left one: a canvas
+	- the right one: options menu
+	
+Right menu allows choosing one of three modes:
+
+ADD POLYGON mode:
+	- LMB adds a new vertex and opens a new polygon
+	- Further clicking will add next vertices to the polygon
+	- To finish drawing the polygon, click the starting vertex
+	- To abandon an open polygon and delete it, press DEL key
+	
+EDIT POLYGON mode:
+	- LMB and dragging moves vertices, edges or polygons on the canvas
+	- RMB removes the vertex from polygon (removing a vertex from a triangle will delete the polygon)
+	- Double click on any edge adds a new vertex in the middle
+	
+ADD CONSTRAINT mode:
+	- LMB sets a fixed length for the edge (close the popup with X to abandon setting a constraint) - this is denoted by a number appearing next to the edge
+	- RMB defines the set of parallel edges - this is denoted by a number in a green circle in the middle of the edge
+		* edges with the same number will be parallel to each other
+		* in order to add another edge to the exisiting parallel group, first right click the edge in the group and then right click the new edge
+	
+	"Remove constraints" button will clear all the length or parallelism relations set
+
+In the right bottom corner of the application there is a menu that allows to choose an algorithm used to draw edges between vertices:
+	- System algorithm implemented in C# as a method Graphics.DrawLine(Pen, Point, Point)
+	- Manually implemented Bresenham algorithm
+
+The change of the chosen algorithm will apply immediately.
