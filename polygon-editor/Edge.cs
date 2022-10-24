@@ -12,7 +12,14 @@ namespace polygon_editor
         public static double EPSILON = 1.0;
         public static void DrawEdge(Point v1, Point v2, Graphics g, Pen p)
         {
-            g.DrawLine(p, v1, v2);
+            try
+            {
+                g.DrawLine(p, v1, v2);
+            }
+            catch(Exception)
+            {
+                return;
+            }
         }
 
         public static void DrawEdgeBresenham(Point v1, Point v2, Graphics g, Pen p)

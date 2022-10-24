@@ -44,11 +44,12 @@ namespace polygon_editor
 
         public void FillScene()
         {
-            var v1 = new Vertex(new Point(200, 400), false);
-            var v2 = new Vertex(new Point(250, 100), false);
+            var v0 = new Vertex(new Point(200, 200), false);
+            var v1 = new Vertex(new Point(300, 400), false);
+            var v2 = new Vertex(new Point(350, 100), false);
 
             Polygon poly1 = new();
-            poly1.AddVertex(new Vertex(new Point(100, 200), false));
+            poly1.AddVertex(v0);
             poly1.AddVertex(v1);
             poly1.AddVertex(v2);
             poly1.IsFinished = true;
@@ -57,10 +58,10 @@ namespace polygon_editor
             edgeLengthConstraints.Add(c);
             c.ApplyConstraint(false);
 
-            var v3 = new Vertex(new Point(500, 400), false);
+            var v3 = new Vertex(new Point(600, 400), false);
             var v4 = new Vertex(new Point(700, 400), false);
-            var v6 = new Vertex(new Point(400, 300), false);
-            var v5 = new Vertex(new Point(750, 300), false);
+            var v6 = new Vertex(new Point(500, 300), false);
+            var v5 = new Vertex(new Point(650, 300), false);
 
             Polygon poly2 = new();
             poly2.AddVertex(v3);
@@ -69,11 +70,11 @@ namespace polygon_editor
             poly2.AddVertex(v6);
             poly2.IsFinished = true;
 
-            var pc = new ParallelConstraint(new List<(Vertex, Vertex)>() { (v3, v4) }, 1);
-            pc.Edges.Add((v5, v6));
+            var pc = new ParallelConstraint(new List<(Vertex, Vertex)>() { (v5, v6) }, 1);
+            pc.Edges.Add((v1, v0));
             parallelConstraints.Add(pc);
             pc.Extendable = false;
-            //pc.ApplyConstraint(true, false);
+            pc.ApplyConstraint(true);
 
             polygons.Add(poly1);
             polygons.Add(poly2);

@@ -147,7 +147,8 @@ namespace polygon_editor
                     newY = (int)(tan * (v.Point.X - a)) + b;
                 }
 
-                if (newX > 1e8 || newX < -1e8 || newY > 1e8 || newY < -1e8)
+                double limit = 1e4;
+                if (newX > limit || newX < -limit || newY > limit || newY < -limit)
                     return;
 
                 v.Point = new Point(newX, newY);
