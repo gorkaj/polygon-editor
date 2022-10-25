@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace polygon_editor
 {
@@ -29,8 +30,9 @@ namespace polygon_editor
             vertices.Add(v);
         }
 
-        public void Draw(Graphics g, bool useSystemDrawing)
+        public void Draw(Graphics g, bool useSystemDrawing, bool useBresenhamDrawing, int lineWidth)
         {
+            POLY_PEN.Width = lineWidth;
             for (int i=0; i < vertices.Count; i++)
             {
                 vertices[i].Draw(g);
@@ -38,8 +40,10 @@ namespace polygon_editor
                 {
                     if (useSystemDrawing)
                         Edge.DrawEdge(vertices[i].Point, vertices[(i + 1) % vertices.Count].Point, g, POLY_PEN);
-                    else
+                    else if(useBresenhamDrawing)
                         Edge.DrawEdgeBresenham(vertices[i].Point, vertices[(i + 1) % vertices.Count].Point, g, POLY_PEN);
+                    else
+                        Edge.DrawEdgeWu(vertices[i].Point, vertices[(i + 1) % vertices.Count].Point, g, POLY_PEN);
                 }
                     
             }

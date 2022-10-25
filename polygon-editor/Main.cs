@@ -23,6 +23,8 @@ namespace polygon_editor
         private bool extendParallel;
         private Vertex? movingVertex;
 
+        public int LINE_WIDTH = 1;
+
         public Main()
         {
             InitializeComponent();
@@ -33,6 +35,14 @@ namespace polygon_editor
             movingVertex = null;
             isPolyOpen = false;
             extendParallel = false;
+
+            if(lineWidthBox.Text != "")
+            {
+                var width = int.Parse(lineWidthBox.Text);
+                if (width >= 1 && width <= 10)
+                    LINE_WIDTH = width;
+            }
+
             FillScene();
             RepaintCanvas();
         }
@@ -189,7 +199,7 @@ namespace polygon_editor
             {
                 foreach(Polygon polygon in polygons)
                 {
-                    polygon.Draw(g, radioButtonSystemAlgo.Checked);
+                    polygon.Draw(g, radioButtonSystemAlgo.Checked, radioButtonBresenhamAlgo.Checked, LINE_WIDTH);
                 }
 
                 foreach (var constraint in edgeLengthConstraints)
@@ -506,6 +516,17 @@ namespace polygon_editor
         {
             edgeLengthConstraints.Clear();
             parallelConstraints.Clear();
+            RepaintCanvas();
+        }
+
+        private void lineWidthBox_TextChanged(object sender, EventArgs e)
+        {
+            if (lineWidthBox.Text != "")
+            {
+                var width = int.Parse(lineWidthBox.Text);
+                if (width >= 1 && width <= 10)
+                    LINE_WIDTH = width;
+            }
             RepaintCanvas();
         }
     }

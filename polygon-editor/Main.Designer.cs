@@ -31,8 +31,11 @@
             this.Canvas = new System.Windows.Forms.PictureBox();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.rightPanel = new System.Windows.Forms.Panel();
+            this.groupBoxWidth = new System.Windows.Forms.GroupBox();
+            this.lineWidthBox = new System.Windows.Forms.TextBox();
             this.clearConstraintsBtn = new System.Windows.Forms.Button();
             this.algoGroupBox = new System.Windows.Forms.GroupBox();
+            this.radioButtonWuAlgo = new System.Windows.Forms.RadioButton();
             this.radioButtonBresenhamAlgo = new System.Windows.Forms.RadioButton();
             this.radioButtonSystemAlgo = new System.Windows.Forms.RadioButton();
             this.modeGroupBox = new System.Windows.Forms.GroupBox();
@@ -42,6 +45,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.tableLayout.SuspendLayout();
             this.rightPanel.SuspendLayout();
+            this.groupBoxWidth.SuspendLayout();
             this.algoGroupBox.SuspendLayout();
             this.modeGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -77,6 +81,7 @@
             // rightPanel
             // 
             this.rightPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.rightPanel.Controls.Add(this.groupBoxWidth);
             this.rightPanel.Controls.Add(this.clearConstraintsBtn);
             this.rightPanel.Controls.Add(this.algoGroupBox);
             this.rightPanel.Controls.Add(this.modeGroupBox);
@@ -85,6 +90,30 @@
             this.rightPanel.Name = "rightPanel";
             this.rightPanel.Size = new System.Drawing.Size(191, 697);
             this.rightPanel.TabIndex = 1;
+            // 
+            // groupBoxWidth
+            // 
+            this.groupBoxWidth.Controls.Add(this.lineWidthBox);
+            this.groupBoxWidth.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBoxWidth.Location = new System.Drawing.Point(0, 466);
+            this.groupBoxWidth.Name = "groupBoxWidth";
+            this.groupBoxWidth.Size = new System.Drawing.Size(191, 90);
+            this.groupBoxWidth.TabIndex = 3;
+            this.groupBoxWidth.TabStop = false;
+            this.groupBoxWidth.Text = "Line width";
+            // 
+            // lineWidthBox
+            // 
+            this.lineWidthBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lineWidthBox.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lineWidthBox.Location = new System.Drawing.Point(32, 35);
+            this.lineWidthBox.Name = "lineWidthBox";
+            this.lineWidthBox.Size = new System.Drawing.Size(125, 31);
+            this.lineWidthBox.TabIndex = 0;
+            this.lineWidthBox.Text = "3";
+            this.lineWidthBox.TextChanged += new System.EventHandler(this.lineWidthBox_TextChanged);
             // 
             // clearConstraintsBtn
             // 
@@ -100,15 +129,27 @@
             // 
             // algoGroupBox
             // 
+            this.algoGroupBox.Controls.Add(this.radioButtonWuAlgo);
             this.algoGroupBox.Controls.Add(this.radioButtonBresenhamAlgo);
             this.algoGroupBox.Controls.Add(this.radioButtonSystemAlgo);
             this.algoGroupBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.algoGroupBox.Location = new System.Drawing.Point(0, 597);
+            this.algoGroupBox.Location = new System.Drawing.Point(0, 556);
             this.algoGroupBox.Name = "algoGroupBox";
-            this.algoGroupBox.Size = new System.Drawing.Size(191, 100);
+            this.algoGroupBox.Size = new System.Drawing.Size(191, 141);
             this.algoGroupBox.TabIndex = 1;
             this.algoGroupBox.TabStop = false;
             this.algoGroupBox.Text = "Drawing algorithm";
+            // 
+            // radioButtonWuAlgo
+            // 
+            this.radioButtonWuAlgo.AutoSize = true;
+            this.radioButtonWuAlgo.Location = new System.Drawing.Point(11, 91);
+            this.radioButtonWuAlgo.Name = "radioButtonWuAlgo";
+            this.radioButtonWuAlgo.Size = new System.Drawing.Size(121, 24);
+            this.radioButtonWuAlgo.TabIndex = 2;
+            this.radioButtonWuAlgo.TabStop = true;
+            this.radioButtonWuAlgo.Text = "Wu algorithm";
+            this.radioButtonWuAlgo.UseVisualStyleBackColor = true;
             // 
             // radioButtonBresenhamAlgo
             // 
@@ -197,6 +238,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();
             this.tableLayout.ResumeLayout(false);
             this.rightPanel.ResumeLayout(false);
+            this.groupBoxWidth.ResumeLayout(false);
+            this.groupBoxWidth.PerformLayout();
             this.algoGroupBox.ResumeLayout(false);
             this.algoGroupBox.PerformLayout();
             this.modeGroupBox.ResumeLayout(false);
@@ -217,5 +260,8 @@
         private System.Windows.Forms.RadioButton radioButtonSystemAlgo;
         private System.Windows.Forms.RadioButton radioButtonConstraints;
         private System.Windows.Forms.Button clearConstraintsBtn;
+        private System.Windows.Forms.RadioButton radioButtonWuAlgo;
+        private System.Windows.Forms.GroupBox groupBoxWidth;
+        private System.Windows.Forms.TextBox lineWidthBox;
     }
 }
