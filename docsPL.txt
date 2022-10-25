@@ -1,0 +1,32 @@
+Jak używać Edytora Wielokątów?
+
+Układ aplikacji podzielony jest na dwie sekcje:
+	- lewa, będąca kanwą
+	- prawa, będąca panel z opcjami
+
+Prawe menu pozwala wybrać jeden z trzech trybów:
+
+tryb ADD POLYGON:
+	- lewy przycisk myszy dodaje nowy wierzchołek i otwiera nowy wielokąt
+	- dalsze kliknięcia dodają kolejne wierzchołki do wielokąta
+	- kliknięcie na wierzchołek początkowy zakończy rysowanie wielokąta
+	- wciśnięcie przycisku DEL podczas tworzenia wielokąta porzuci jego tworzenie i usunie
+
+tryb EDIT POLYGON:
+	- lewy przycisk myszy pozwala na przesuwanie wierzchołków, krawędzi oraz wielokątów na kanwie
+	- kliknięcie prawym przyciskiem myszy na wierzchołek usunie go (usunięcie wierzchołka z trójkąta, usunie ten trójkąt)
+	- podwójne kliknięcie lewym przyciskiem na krawędź dodaje nowy wierzchołek na środku tej krawędzi
+
+tryb ADD CONSTRAINT:
+	- kliknięcie lewym przyciskiem myszy na krawędź pozwala na dodanie ustalonej długości krawędzi (oznaczone jest to przez liczbę wyświetlającą się obok krawędzi)
+	- kliknięcie prawym przyciskiem myszy definiuje zbiór równoległych krawędzi (jest to oznaczone przez liczbę w zielonym kółku na środku krawędzi)
+		* krawędzie z tym samym numerem będą do siebie równoległe
+		* aby dodać kolejną krawędź do istniejącej grupy, najpierw kliknij prawym przyciskiem na krawędź z grupy, a potem na nową krawędź
+	
+	Przycisk "Remove constraints" wyczyści wszystkie relacje równoległości oraz długości krawędzi.
+
+W prawym dolnym rogu aplikacji znajduje się menu, które pozwala na wybór algorytmu, wykorzystywanego do rysowania krawędzi między dwoma wierzchołkami:
+	- biblioteczny algorytm zaimplementowany w C# jako metoda Graphics.DrawLine(Pen, Point, Point)
+	- ręcznie zaimplementowany algorytm Bresenhama
+
+Zmiana wyboru algorytmu zostanie zastosowana natychmiastowo.
