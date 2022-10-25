@@ -23,6 +23,8 @@ tryb ADD CONSTRAINT:
 		* krawędzie z tym samym numerem będą do siebie równoległe
 		* aby dodać kolejną krawędź do istniejącej grupy, najpierw kliknij prawym przyciskiem na krawędź z grupy, a potem na nową krawędź
 	
+	Za relacje odpowiadzialne są klasy implementujące interfejs IConstraint, które przy każdym przesunięciu elementów wielokąta, poprawiają pozycję innych elementów mechanizmami geometrii analitycznej.
+
 	Przycisk "Remove constraints" wyczyści wszystkie relacje równoległości oraz długości krawędzi.
 
 W prawym dolnym rogu aplikacji znajduje się menu, które pozwala na wybór algorytmu, wykorzystywanego do rysowania krawędzi między dwoma wierzchołkami:
